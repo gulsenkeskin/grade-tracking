@@ -9,10 +9,17 @@ void main(){
   ));
 }
 
-class MyApp extends StatelessWidget {
-  String mesaj="Öğrenci Takip Sistemi";
-  List<Student> students=[Student("Hermonie", "Granger", 100,"https://i.stack.imgur.com/7w3YO.jpg?s=192&g=1"),Student("Harry", "Potter", 20,"https://upload.wikimedia.org/wikipedia/tr/6/61/HarryPotterOotP.jpg"),Student("Ron", "Weasley", 70,"https://i.stack.imgur.com/7w3YO.jpg?s=192&g=1")];
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
 
+class _MyAppState extends State<MyApp> {
+  String mesaj="Öğrenci Takip Sistemi";
+
+  String seciliOgrenci="";
+
+  List<Student> students=[Student("Hermonie", "Granger", 100,"https://i.stack.imgur.com/7w3YO.jpg?s=192&g=1"),Student("Harry", "Potter", 20,"https://upload.wikimedia.org/wikipedia/tr/6/61/HarryPotterOotP.jpg"),Student("Ron", "Weasley", 70,"https://i.stack.imgur.com/7w3YO.jpg?s=192&g=1")];
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +30,6 @@ class MyApp extends StatelessWidget {
       body: buildBody(context),
     );
   }
-
 
   String sinavHesapla(int puan){
     String mesaj="";
@@ -65,11 +71,15 @@ class MyApp extends StatelessWidget {
                     trailing: buildStatusIcon(students[index].grade),
                     //elemente tıklamak onTab
                     onTap: (){
-                      print(students[index].firstName+" "+ students[index].lastName);
+                      //state e değer atamak
+                      setState(() {
+                        seciliOgrenci=students[index].firstName+" "+ students[index].lastName;
+                      });
                     },
                   );
                 })
         ),
+        Text("Seçili öğrenci: "+ seciliOgrenci),
         Center(
           child:RaisedButton(
             child:Text("Button"),
@@ -93,8 +103,6 @@ class MyApp extends StatelessWidget {
       return Icon(Icons.clear);
     }
   }
-
-
 }
 
 
