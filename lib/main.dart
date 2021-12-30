@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:temel_widget/models/student.dart';
 
 void main(){
   //MaterialApp material standartlarında bir çalışma ortamı kurar ve ona göre sistemin konfigürasyonunu gerçekleştirir
@@ -9,8 +10,9 @@ void main(){
 }
 
 class MyApp extends StatelessWidget {
-  String mesaj="mesajjjj";
-  var ogrenciler=["Gülsen Keskin","Nihal Hızal","Eda Eyüboğlu","Tuğçe Emir"];
+  String mesaj="Öğrenci Takip Sistemi";
+  List<Student> students=[Student("Hermonie", "Granger", 100,"https://i.stack.imgur.com/7w3YO.jpg?s=192&g=1"),Student("Harry", "Potter", 20,"https://upload.wikimedia.org/wikipedia/tr/6/61/HarryPotterOotP.jpg"),Student("Ron", "Weasley", 70,"https://i.stack.imgur.com/7w3YO.jpg?s=192&g=1")];
+
 
   @override
   Widget build(BuildContext context) {
@@ -49,10 +51,23 @@ class MyApp extends StatelessWidget {
         Expanded(
           //elimizdeki veriye göre dinamik list view oluşturur
             child: ListView.builder(
-                itemCount: ogrenciler.length,
+                itemCount: students.length,
                 //eleman sayısı kadar itemBuilder fonksiyonu çalıştırılır
                 itemBuilder: (BuildContext context, int index){
-                  return Text(ogrenciler[index]);
+                  //listenin içerisinde hangi elemanın nereye yerleştirileceğini söylediğimiz kısım
+                  return ListTile(
+                    //leading en başa tekabul eder ... resim için
+                    //NETWORK İMAGE İNTERNET ÜZERİNDEKİ BİR RESMİ ADRES OLARAK VERİP KULLANABİLMEMİZİ SAĞLAR
+                    leading: CircleAvatar(backgroundImage:NetworkImage(students[index].image) ,),
+                    title: Text(students[index].firstName+" "+ students[index].lastName),
+                    subtitle: Text("Sınavdan aldığı not: " + students[index].grade.toString()+ " ["+ students[index].getStatus+"]"),
+                    //icon koymak için trailing en sona tekabul eder
+                    trailing: buildStatusIcon(students[index].grade),
+                    //elemente tıklamak onTab
+                    onTap: (){
+                      print(students[index].firstName+" "+ students[index].lastName);
+                    },
+                  );
                 })
         ),
         Center(
@@ -67,6 +82,16 @@ class MyApp extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  Widget buildStatusIcon(int grade) {
+    if(grade>=50){
+      return Icon(Icons.done);
+    }else if(grade>=40){
+      return Icon(Icons.album);
+    }else{
+      return Icon(Icons.clear);
+    }
   }
 
 
