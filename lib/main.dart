@@ -10,36 +10,15 @@ void main(){
 
 class MyApp extends StatelessWidget {
   String mesaj="mesajjjj";
+  var ogrenciler=["Gülsen Keskin","Nihal Hızal","Eda Eyüboğlu","Tuğçe Emir"];
+
   @override
   Widget build(BuildContext context) {
-    var ogrenciler=["Gülsen Keskin","Nihal Hızal","Eda Eyüboğlu","Tuğçe Emir"];
     return Scaffold(
       appBar: AppBar(
         title: Text(mesaj),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            //elimizdeki veriye göre dinamik list view oluşturur
-            child: ListView.builder(
-                itemCount: ogrenciler.length,
-                //eleman sayısı kadar itemBuilder fonksiyonu çalıştırılır
-                itemBuilder: (BuildContext context, int index){
-                return Text(ogrenciler[index]);
-                })
-          ),
-          Center(
-            child:RaisedButton(
-              child:Text("Gövde kısım"),
-              onPressed: (){
-                var mesaj= sinavHesapla(55);
-                //Widget ağacından düşen context'i paremetre olarak göndeririz
-                mesajGoster(context, mesaj);
-              },
-            ),
-          ),
-        ],
-      ),
+      body: buildBody(context),
     );
   }
 
@@ -62,6 +41,32 @@ class MyApp extends StatelessWidget {
       content: Text(mesaj),
     );
     showDialog(context: context, builder: (BuildContext context)=>alert);
+  }
+
+  Widget buildBody(BuildContext context) {
+    return Column(
+      children: [
+        Expanded(
+          //elimizdeki veriye göre dinamik list view oluşturur
+            child: ListView.builder(
+                itemCount: ogrenciler.length,
+                //eleman sayısı kadar itemBuilder fonksiyonu çalıştırılır
+                itemBuilder: (BuildContext context, int index){
+                  return Text(ogrenciler[index]);
+                })
+        ),
+        Center(
+          child:RaisedButton(
+            child:Text("Button"),
+            onPressed: (){
+              var mesaj= sinavHesapla(55);
+              //Widget ağacından düşen context'i paremetre olarak göndeririz
+              mesajGoster(context, mesaj);
+            },
+          ),
+        ),
+      ],
+    );
   }
 
 
