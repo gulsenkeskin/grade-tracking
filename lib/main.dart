@@ -12,31 +12,45 @@ class MyApp extends StatelessWidget {
   String mesaj="mesajjjj";
   @override
   Widget build(BuildContext context) {
+    var ogrenciler=["Gülsen Keskin","Nihal Hızal","Eda Eyüboğlu","Tuğçe Emir"];
     return Scaffold(
       appBar: AppBar(
         title: Text(mesaj),
       ),
-      body: Center(
-        child:RaisedButton(
-          child:Text("Gövde kısım"),
-          onPressed: (){
-            int puan=40;
-            String mesaj="";
-            if(puan>=50){
-              mesaj="Geçti";
-            }else if(puan>=40){
-              mesaj="Bütünlemeye kaldı";
-            }else{
-              mesaj="Kaldı";
-            }
+      body: Column(
+        children: [
+          Expanded(
+            //elimizdeki veriye göre dinamik list view oluşturur
+            child: ListView.builder(
+                itemCount: ogrenciler.length,
+                //eleman sayısı kadar itemBuilder fonksiyonu çalıştırılır
+                itemBuilder: (BuildContext context, int index){
+                return Text(ogrenciler[index]);
+                })
+          ),
+          Center(
+            child:RaisedButton(
+              child:Text("Gövde kısım"),
+              onPressed: (){
+                int puan=40;
+                String mesaj="";
+                if(puan>=50){
+                  mesaj="Geçti";
+                }else if(puan>=40){
+                  mesaj="Bütünlemeye kaldı";
+                }else{
+                  mesaj="Kaldı";
+                }
 
-            var alert= AlertDialog(
-              title: Text("Sınav Sonucu"),
-              content: Text(mesaj),
-            );
-            showDialog(context: context, builder: (BuildContext context)=>alert);
-          },
-        ),
+                var alert= AlertDialog(
+                  title: Text("Sınav Sonucu"),
+                  content: Text(mesaj),
+                );
+                showDialog(context: context, builder: (BuildContext context)=>alert);
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
