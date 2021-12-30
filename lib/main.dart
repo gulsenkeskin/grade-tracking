@@ -32,21 +32,9 @@ class MyApp extends StatelessWidget {
             child:RaisedButton(
               child:Text("Gövde kısım"),
               onPressed: (){
-                int puan=40;
-                String mesaj="";
-                if(puan>=50){
-                  mesaj="Geçti";
-                }else if(puan>=40){
-                  mesaj="Bütünlemeye kaldı";
-                }else{
-                  mesaj="Kaldı";
-                }
-
-                var alert= AlertDialog(
-                  title: Text("Sınav Sonucu"),
-                  content: Text(mesaj),
-                );
-                showDialog(context: context, builder: (BuildContext context)=>alert);
+                var mesaj= sinavHesapla(55);
+                //Widget ağacından düşen context'i paremetre olarak göndeririz
+                mesajGoster(context, mesaj);
               },
             ),
           ),
@@ -54,6 +42,29 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+
+
+  String sinavHesapla(int puan){
+    String mesaj="";
+    if(puan>=50){
+      mesaj="Geçti";
+    }else if(puan>=40){
+      mesaj="Bütünlemeye kaldı";
+    }else{
+      mesaj="Kaldı";
+    }
+    return mesaj;
+  }
+
+  void mesajGoster(BuildContext context, String mesaj){
+    var alert= AlertDialog(
+      title: Text("Sınav Sonucu"),
+      content: Text(mesaj),
+    );
+    showDialog(context: context, builder: (BuildContext context)=>alert);
+  }
+
+
 }
 
 
