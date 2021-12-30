@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:temel_widget/models/student.dart';
 import 'package:temel_widget/screens/student_add.dart';
+import 'package:temel_widget/screens/student_edit.dart';
 
 void main() {
   //MaterialApp material standartlarında bir çalışma ortamı kurar ve ona göre sistemin konfigürasyonunu gerçekleştirir
@@ -115,7 +116,7 @@ class _MyAppState extends State<MyApp> {
                 onPressed: () {
                  //student_add.dart sayfasına yönlendirmek
                   //route tanımlarken MaterialPageRoute fonksiyonunu kullanırız
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>StudentAdd()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>StudentAdd(students)));
                 },
               ),
             ),
@@ -140,9 +141,7 @@ class _MyAppState extends State<MyApp> {
                   ],
                 ),
                 onPressed: () {
-                  var mesaj=selectedStudent.firstName+" Öğrencisi Güncellendi";
-                  //Widget ağacından düşen context'i paremetre olarak göndeririz
-                  mesajGoster(context, mesaj);
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>StudentEdit(selectedStudent)));
                 },
               ),
             ),

@@ -1,37 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:temel_widget/models/student.dart';
 
-class StudentAdd extends StatefulWidget {
-  List<Student> students =[];
-  StudentAdd(List<Student> students){
-    this.students=students;
+class StudentEdit extends StatefulWidget {
+  Student selectedStudent= Student.withId(0, "", "", 0, "");
+  StudentEdit(Student selectedStudent){
+    this.selectedStudent=selectedStudent;
   }
 
   @override
   State<StatefulWidget> createState() {
-    return _StudentAddState(students);
+    return _StudentEditState(selectedStudent);
   }
 }
 
-class _StudentAddState extends State {
-  List<Student> students = [];
-  var student = Student.withoutInfo();
+class _StudentEditState extends State {
+  Student selectedStudent= Student.withId(0, "", "", 0, "");
   //formdaki değerlere erişebilmek için global key ekliyoruz
   //form durumu için bi taneformun key özelliğine bu oluşturduğumuz key değerini veririz anahtar üret
   var formKey = GlobalKey<FormState>(); //
-  _StudentAddState(List<Student> students){
-    this.students=students;
+  _StudentEditState(Student selectedStudent){
+    this.selectedStudent=selectedStudent;
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Yeni öğrenci ekle"),
+          title:const Text("Yeni öğrenci ekle"),
         ),
         //container widget ekranda sağdan soldan boşluk koymayı sağlar
         body: Container(
           //her taraftan 20 boşluk bırak
-          margin:const EdgeInsets.all(20.0),
+          margin: EdgeInsets.all(20.0),
           //örn only kullanarak sadece belirli bir alandan boşluk bırakabiliriz
           //margin: EdgeInsets.only(top:20.0, right:20.0),
           child: Form(
@@ -51,10 +50,11 @@ class _StudentAddState extends State {
   Widget buildFirstNameField() {
     //input
     return TextFormField(
+      initialValue: selectedStudent.firstName,
       //tasarım işlemleri için
       //hint text kullanıcıya hangi formatta veri girebileceğini göstermek için kullanılır
-      decoration:const
-          InputDecoration(labelText: "Öğrenci adı: ", hintText: "Gülsen"),
+      decoration:
+      const InputDecoration(labelText: "Öğrenci adı: ", hintText: "Gülsen"),
       //validator ile bu form alanına ait validayon gerçekleştiririz
       //validasyon ilgili alana girilecek verinin formatının uygunluğudur
       validator: (value) {
@@ -66,13 +66,14 @@ class _StudentAddState extends State {
       //formda kaydet butonuna basıldığında onSaved evente tetiklenir
       onSaved: (value) {
         //student.firstname kullanıcının girdiği değerdir
-        student.firstName = value.toString();
+        selectedStudent.firstName = value.toString();
       },
     );
   }
 
   Widget buildLastNameField() {
     return TextFormField(
+      initialValue: selectedStudent.lastName,
       //tasarım işlemleri için
       //hint text kullanıcıya hangi formatta veri girebileceğini göstermek için kullanılır
       decoration:
@@ -88,16 +89,17 @@ class _StudentAddState extends State {
       //formda kaydet butonuna basıldığında onSaved evente tetiklenir
       onSaved: (value) {
         //student.firstname kullanıcının girdiği değerdir
-        student.lastName = value.toString();
+        selectedStudent.lastName = value.toString();
       },
     );
   }
 
   Widget buildGradeNameField() {
     return TextFormField(
+      initialValue: selectedStudent.grade.toString(),
       //tasarım işlemleri için
       //hint text kullanıcıya hangi formatta veri girebileceğini göstermek için kullanılır
-      decoration:const InputDecoration(labelText: "Aldığı not: ", hintText: "100"),
+      decoration: const InputDecoration(labelText: "Aldığı not: ", hintText: "100"),
       //validator ile bu form alanına ait validayon gerçekleştiririz
       //validasyon ilgili alana girilecek verinin formatının uygunluğudur
       validator: (value) {
@@ -111,7 +113,7 @@ class _StudentAddState extends State {
       //formda kaydet butonuna basıldığında onSaved evente tetiklenir
       onSaved: (value) {
         //student.firstname kullanıcının girdiği değerdir
-        student.grade = int.parse(value.toString());
+        selectedStudent.grade = int.parse(value.toString());
       },
     );
   }
@@ -131,9 +133,6 @@ class _StudentAddState extends State {
             //form içerisindeki onSaved alanlarını çalıştırır
             //Bu Formun soyundan gelen her Form Alanını kaydeder.
             formKey.currentState!.save();
-            setState(() {
-              students.add(student);
-            });
             saveStudent();
             //bi önceki sayfaya döner
             Navigator.pop(context);
@@ -142,8 +141,8 @@ class _StudentAddState extends State {
   }
 
   void saveStudent() {
-    print(student.firstName);
-    print(student.lastName);
-    print(student.grade);
+    print(selectedStudent.firstName);
+    print(selectedStudent.lastName);
+    print(selectedStudent.grade);
   }
 }
