@@ -20,6 +20,9 @@ this.grade=grade;
 this.image=image;
 }
 
+Student.withoutInfo(){
+
+}
 //getter setter
 
 String get getFirstName{

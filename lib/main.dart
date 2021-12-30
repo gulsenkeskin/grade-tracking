@@ -20,12 +20,18 @@ class _MyAppState extends State<MyApp> {
   Student selectedStudent=Student.withId(0, "", "", 0, "");
 
   List<Student> students = [
-    Student.withId(1,"Hermonie", "Granger", 100,
+    Student.withId(1,"Gülsen", "Keskin", 100,
         "https://i.stack.imgur.com/7w3YO.jpg?s=192&g=1"),
-    Student.withId(2,"Harry", "Potter", 20,
-        "https://upload.wikimedia.org/wikipedia/tr/6/61/HarryPotterOotP.jpg"),
+    Student.withId(2,"Mümin", "Zehir", 100,
+        "https://fts.tvoip.turkcell.com.tr/scontent/avatar/p2p/529/fed7ef98d2a048d2de5ec0848bde1827_tmb.jpg?v=1640859797673"),
     Student.withId(
-        3,"Ron", "Weasley", 70, "https://i.stack.imgur.com/7w3YO.jpg?s=192&g=1")
+        3,"Nihal", "Hizal", 100, "https://instagram.fist13-1.fna.fbcdn.net/v/t51.2885-19/s320x320/250136504_1758171721043759_9102911073553762406_n.jpg?_nc_ht=instagram.fist13-1.fna.fbcdn.net&_nc_cat=111&_nc_ohc=VojJ03FMWIwAX_Y4QVa&edm=ABfd0MgBAAAA&ccb=7-4&oh=00_AT88UPyVqes5oZ6FJsVDBCS7zmj5RxkokIjO-BIt05IzpA&oe=61D56CB6&_nc_sid=7bff83"),
+    Student.withId(4,"Eda", "Yıldız", 20,
+        "https://lh3.googleusercontent.com/proxy/Y2fXn7Xcp_ODSJAPMYHW5G_BrCT6WOCLmNaAM9CS7HczzsoGkTzRxHdP3T2rgeRWD12IVXpgzBNMfT8AwnMFHq-F-DZJh-n5bFBPs_pMIk3yDmoXbomieYr9oLPcZmC3qVfsTZNyp_G83IXhs4nb-1Um"),
+    Student.withId(1,"Buse", "Yıldız", 70,
+        "https://lh3.googleusercontent.com/proxy/Y2fXn7Xcp_ODSJAPMYHW5G_BrCT6WOCLmNaAM9CS7HczzsoGkTzRxHdP3T2rgeRWD12IVXpgzBNMfT8AwnMFHq-F-DZJh-n5bFBPs_pMIk3yDmoXbomieYr9oLPcZmC3qVfsTZNyp_G83IXhs4nb-1Um"),
+    Student.withId(1,"Elif", "Yıldız", 40,
+        "https://lh3.googleusercontent.com/proxy/Y2fXn7Xcp_ODSJAPMYHW5G_BrCT6WOCLmNaAM9CS7HczzsoGkTzRxHdP3T2rgeRWD12IVXpgzBNMfT8AwnMFHq-F-DZJh-n5bFBPs_pMIk3yDmoXbomieYr9oLPcZmC3qVfsTZNyp_G83IXhs4nb-1Um"),
   ];
 
   @override
